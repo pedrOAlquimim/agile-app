@@ -2,6 +2,8 @@ version: '3.7'
 
 services:
   agile_app_api:
+    container_name: api
+
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,19 +19,24 @@ services:
       - ./src:/usr/src/app/src
 
   postgres:
+    container_name: postgres
+    
     image: bitnami/postgresql:latest
     
     ports:
       - '5432:5432'
+
+    env_file:
+      - ".env"
       
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=pools
-    
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
+
     volumes:
       - pools_pg_data:/bitnami/postgressql
   
-
 volumes:
   pools_pg_data:
+

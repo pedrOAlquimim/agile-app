@@ -22,13 +22,15 @@ services:
       - '5432:5432'
       
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=pools
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
     
     volumes:
       - pools_pg_data:/bitnami/postgressql
   
+    env_file:
+      - ".env"
 
 volumes:
   pools_pg_data:
