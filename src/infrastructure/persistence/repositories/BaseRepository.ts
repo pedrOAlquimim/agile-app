@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/core/entities/baseEntity'
+import { BaseEntity } from 'src/core/entities/BaseEntity'
 import { IBaseRepository } from 'src/core/interfaces/repositories/IBaseRepository.interface'
 import { Repository, FindOptionsWhere } from 'typeorm'
 
