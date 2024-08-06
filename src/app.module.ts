@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { env } from './@env'
-import ormConfig from './infrastructure/config/orm.config'
-import ormConfigProd from './infrastructure/config/orm.config.prod'
+import ormConfig from './infrastructure/persistence/config/orm.config'
+import ormConfigProd from './infrastructure/persistence/config/orm.config.prod'
 import { ConfigModule } from '@nestjs/config'
 
 @Module({
