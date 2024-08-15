@@ -1,21 +1,9 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { env } from './@env'
-import ormConfig from './infrastructure/persistence/config/orm.config'
-import ormConfigProd from './infrastructure/persistence/config/orm.config.prod'
-import { ConfigModule } from '@nestjs/config'
+import { dataSourceOptions } from './infrastructure/persistence/config/dataSource'
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [ormConfig],
-      expandVariables: true,
-    }),
-    TypeOrmModule.forRootAsync({
-      useFactory: env.NODE_ENV !== 'production' ? ormConfig : ormConfigProd,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions)],
   controllers: [],
   providers: [],
 })

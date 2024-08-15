@@ -11,9 +11,19 @@ services:
     ports:
       - "3000:3000"
 
+    depends_on:
+    - postgres
+
+    env_file:
+      - ".env"
+
     environment:
       - PORT=3000
       - NODE_ENV=development
+      - PG_HOST=postgres
+      - PG_USERNAME=${DB_USERNAME}
+      - PG_PASSWORD=${DB_PASSWORD}
+      - PG_DATABASE=${DB_DATABASE}
 
     volumes:
       - ./src:/usr/src/app/src
