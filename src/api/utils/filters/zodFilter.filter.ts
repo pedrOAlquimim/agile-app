@@ -11,9 +11,14 @@ export class ZodFilter<T extends ZodError> implements ExceptionFilter {
 
     const customResponse = new CustomResponse<null>()
 
-    const zodErrors = exception.errors.map((item) => item.message)
-    customResponse.addErrorAndExceptionMessage(zodErrors, exception.message)
+    const zodErrors = exception.errors.map((item) => {
+      if (item.code === 'custom') return item.message
+    })
+    const newResponse = customResponse.addErrorAndExceptionMessage(
+      zodErrors,
+      exception.message,
+    )
 
-    response.status(status).json(customResponse)
+    response.status(status).json(newResponse)
   }
 }
