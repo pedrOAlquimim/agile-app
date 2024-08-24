@@ -42,16 +42,14 @@ export class CustomResponse<T> {
 
   addError(errors: Array<string> | Array<ZodIssue>): CustomResponse<T> {
     const response = new CustomResponse<T>()
+    response.data = null
     response.errors = errors
     response.success = false
 
     return response
   }
 
-  addErrorAndExceptionMessage(
-    errors: Array<string> | Array<ZodIssue>,
-    message: string,
-  ) {
+  addErrorAndExceptionMessage(errors: string[] | ZodIssue[], message: string) {
     const response = this.addError(errors)
 
     response.message = message

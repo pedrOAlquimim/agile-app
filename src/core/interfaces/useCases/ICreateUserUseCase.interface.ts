@@ -5,3 +5,5 @@ import { CustomResponse } from 'src/core/response/customResponse'
 export interface ICreateUserUseCase {
   execute: (input: CreateUserDTO) => Promise<CustomResponse<User>>
 }
+
+export const ICreateUserUseCase = Symbol('ICreateUserUseCase')

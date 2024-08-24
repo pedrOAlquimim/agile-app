@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { hash } from 'bcrypt'
 import { randomUUID } from 'crypto'
 import { CreateUserDTO } from 'src/core/dtos/createUser.dto'
 import { User } from 'src/core/entities/User.entity'
+import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepository.interface'
 import { ICreateUserUseCase } from 'src/core/interfaces/useCases/ICreateUserUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
-import { UserRepository } from 'src/infrastructure/persistence/repositories/UserRepository'
 
 @Injectable()
 export class CreateUserUseCase implements ICreateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    @Inject(IUserRepository)
+    private readonly userRepository: IUserRepository,
+  ) {}
 
   async execute(input: CreateUserDTO) {
     const response = new CustomResponse<User>()
@@ -23,13 +26,15 @@ export class CreateUserUseCase implements ICreateUserUseCase {
         return response
       }
 
-      const hashPassword = hash(input.password, 10)
+      const hashPassword = await hash(input.password, 10)
 
-      const newUser: User = {
+      const newUser = {
         id: randomUUID(),
+        email: input.email,
+        firstName: input.firstName,
+        lastName: input.lastName,
         password: hashPassword,
         created_at: new Date(),
-        ...input,
       }
 
       await this.userRepository.add({ ...newUser })
@@ -38,7 +43,6 @@ export class CreateUserUseCase implements ICreateUserUseCase {
 
       return response
     } catch (ex) {
-      console.log(ex)
       response.addErrorAndExceptionMessage([''], ex.message)
       return response
     }

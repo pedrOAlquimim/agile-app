@@ -1,7 +1,9 @@
 import { User } from 'src/core/entities/User.entity'
 import { BaseRepository } from './BaseRepository'
 import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepository.interface'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class UserRepository
   extends BaseRepository<User>
   implements IUserRepository
