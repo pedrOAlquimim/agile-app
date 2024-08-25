@@ -34,7 +34,7 @@ export class AnthenticateUserUseCase implements IAuthenticateUserUseCase {
         user,
         backendTokens: {
           accessToken: await this.jwtService.signAsync(payload, {
-            expiresIn: '1h',
+            expiresIn: '20s',
             secret: env.JWT_SECRET_KEY,
           }),
 
@@ -51,7 +51,7 @@ export class AnthenticateUserUseCase implements IAuthenticateUserUseCase {
     }
   }
 
-  async validateUser(input: LoginDTO): Promise<UserDTO> {
+  private async validateUser(input: LoginDTO): Promise<UserDTO> {
     const user = await this.userRepository.findByEmail(input.email)
 
     if (user && (await compare(input.password, user.password))) {

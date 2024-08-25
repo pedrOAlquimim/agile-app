@@ -8,12 +8,18 @@ import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepositor
 import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/IAuthenticateUserUseCase.interface'
 import { AnthenticateUserUseCase } from 'src/application/use-cases/auth/authenticateUser.use-case'
 import { JwtService } from '@nestjs/jwt'
+import { RefreshJwtGuard } from '../utils/guards/refreshJwtGuard.guard'
+import { JwtGuard } from '../utils/guards/jwtGuard.guard'
+import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/IRefreshTokenUseCase.interface'
+import { RefreshTokenUseCase } from 'src/application/use-cases/auth/refreshToken.use-case'
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
   controllers: [AuthController],
   providers: [
     JwtService,
+    RefreshJwtGuard,
+    JwtGuard,
     {
       provide: ICreateUserUseCase,
       useClass: CreateUserUseCase,
@@ -25,9 +31,16 @@ import { JwtService } from '@nestjs/jwt'
     {
       provide: IAuthenticateUserUseCase,
       useClass: AnthenticateUserUseCase,
+    },
+    {
+      provide: IRefreshTokenUseCase,
+      useClass: RefreshTokenUseCase,
     },
   ],
   exports: [
+    JwtService,
+    RefreshJwtGuard,
+    JwtGuard,
     {
       provide: ICreateUserUseCase,
       useClass: CreateUserUseCase,
@@ -39,6 +52,10 @@ import { JwtService } from '@nestjs/jwt'
     {
       provide: IAuthenticateUserUseCase,
       useClass: AnthenticateUserUseCase,
+    },
+    {
+      provide: IRefreshTokenUseCase,
+      useClass: RefreshTokenUseCase,
     },
   ],
 })
