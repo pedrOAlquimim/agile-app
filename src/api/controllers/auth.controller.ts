@@ -1,7 +1,7 @@
 import { ZodPipe } from '../utils/pipes/zodPipe.pipe'
-import { ICreateUserUseCase } from 'src/core/interfaces/useCases/ICreateUserUseCase.interface'
+import { ICreateUserUseCase } from 'src/core/interfaces/useCases/auth/ICreateUserUseCase.interface'
 import { LoginDTO, loginDTOSchema } from 'src/core/dtos/login.dto'
-import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/IAuthenticateUserUseCase.interface'
+import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/auth/IAuthenticateUserUseCase.interface'
 import { Response } from 'express'
 import { RefreshJwtGuard } from '../utils/guards/refreshJwtGuard.guard'
 import {
@@ -17,7 +17,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common'
-import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/IRefreshTokenUseCase.interface'
+import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/auth/IRefreshTokenUseCase.interface'
 
 @Controller('api/auth')
 export class AuthController {

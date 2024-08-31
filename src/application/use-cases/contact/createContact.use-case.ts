@@ -4,7 +4,7 @@ import { ContactDTOOutput } from 'src/core/dtos/contactOutput.dto'
 import { CreateContactDTOInput } from 'src/core/dtos/createContactInput.dto'
 import { Contact } from 'src/core/entities/Contact.entity'
 import { IContactRepository } from 'src/core/interfaces/repositories/IContactRepository.interface'
-import { ICreateContactUseCase } from 'src/core/interfaces/useCases/ICreateContactUseCase.interface'
+import { ICreateContactUseCase } from 'src/core/interfaces/useCases/contact/ICreateContactUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

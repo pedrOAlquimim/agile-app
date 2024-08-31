@@ -1,7 +1,7 @@
-import { ICreateContactUseCase } from 'src/core/interfaces/useCases/ICreateContactUseCase.interface'
+import { ICreateContactUseCase } from 'src/core/interfaces/useCases/contact/ICreateContactUseCase.interface'
 import { ZodPipe } from '../utils/pipes/zodPipe.pipe'
-import { IGetContactsByUserUseCase } from 'src/core/interfaces/useCases/IGetContactsByUserUseCase.interface'
-import { IDeleteContactUseCase } from 'src/core/interfaces/useCases/IDeleteContactUseCase.interface'
+import { IGetContactsByUserUseCase } from 'src/core/interfaces/useCases/contact/IGetContactsByUserUseCase.interface'
+import { IDeleteContactUseCase } from 'src/core/interfaces/useCases/contact/IDeleteContactUseCase.interface'
 import { Response } from 'express'
 import {
   UpdateContactDTOInput,
@@ -23,7 +23,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common'
-import { IUpdateContactUseCase } from 'src/core/interfaces/useCases/IUpdateContactUseCase.interface'
+import { IUpdateContactUseCase } from 'src/core/interfaces/useCases/contact/IUpdateContactUseCase.interface'
 import { JwtGuard } from '../utils/guards/jwtGuard.guard'
 
 @Controller('api/contact')

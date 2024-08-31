@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto'
 import { CreateUserDTO } from 'src/core/dtos/createUser.dto'
 import { UserDTO } from 'src/core/dtos/user.dto'
 import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepository.interface'
-import { ICreateUserUseCase } from 'src/core/interfaces/useCases/ICreateUserUseCase.interface'
+import { ICreateUserUseCase } from 'src/core/interfaces/useCases/auth/ICreateUserUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

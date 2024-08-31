@@ -6,7 +6,7 @@ import { AuthenticateDTO } from 'src/core/dtos/authenticateUser.dto'
 import { LoginDTO } from 'src/core/dtos/login.dto'
 import { UserDTO } from 'src/core/dtos/user.dto'
 import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepository.interface'
-import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/IAuthenticateUserUseCase.interface'
+import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/auth/IAuthenticateUserUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

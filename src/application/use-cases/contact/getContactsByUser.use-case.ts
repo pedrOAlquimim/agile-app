@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { ContactDTOOutput } from 'src/core/dtos/contactOutput.dto'
 import { IContactRepository } from 'src/core/interfaces/repositories/IContactRepository.interface'
-import { IGetContactsByUserUseCase } from 'src/core/interfaces/useCases/IGetContactsByUserUseCase.interface'
+import { IGetContactsByUserUseCase } from 'src/core/interfaces/useCases/contact/IGetContactsByUserUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

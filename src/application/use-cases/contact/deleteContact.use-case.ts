@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { IContactRepository } from 'src/core/interfaces/repositories/IContactRepository.interface'
-import { IDeleteContactUseCase } from 'src/core/interfaces/useCases/IDeleteContactUseCase.interface'
+import { IDeleteContactUseCase } from 'src/core/interfaces/useCases/contact/IDeleteContactUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

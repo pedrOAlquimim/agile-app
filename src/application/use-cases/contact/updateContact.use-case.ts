@@ -3,7 +3,7 @@ import { ContactDTOOutput } from 'src/core/dtos/contactOutput.dto'
 import { UpdateContactDTOInput } from 'src/core/dtos/updateContact.dto'
 import { Contact } from 'src/core/entities/Contact.entity'
 import { IContactRepository } from 'src/core/interfaces/repositories/IContactRepository.interface'
-import { IUpdateContactUseCase } from 'src/core/interfaces/useCases/IUpdateContactUseCase.interface'
+import { IUpdateContactUseCase } from 'src/core/interfaces/useCases/contact/IUpdateContactUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()

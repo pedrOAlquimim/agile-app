@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import { env } from 'src/@env'
 
 import { RefreshTokenDTO } from 'src/core/dtos/refreshToken.dto'
-import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/IRefreshTokenUseCase.interface'
+import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/auth/IRefreshTokenUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()
