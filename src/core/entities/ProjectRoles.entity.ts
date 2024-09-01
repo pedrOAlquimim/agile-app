@@ -1,10 +1,10 @@
 import { Column, CreateDateColumn, Entity } from 'typeorm'
 import { BaseEntity } from './BaseEntity'
 
-@Entity()
-export class Board extends BaseEntity {
+@Entity('projectRoles')
+export class ProjectRoles extends BaseEntity {
   @Column('varchar')
-  title: string
+  role: string
 
   @CreateDateColumn()
   created_at: Date
