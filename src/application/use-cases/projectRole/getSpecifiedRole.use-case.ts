@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { ProjectRolesOutputDTO } from 'src/core/dtos/projectRolesOutput.dto'
 import { IProjectRolesRepository } from 'src/core/interfaces/repositories/IProjectRolesRepository.interface'
+import { IGetSpecifiedRoleUseCase } from 'src/core/interfaces/useCases/projectRole/IGetSpecifiedRoleUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 @Injectable()
-export class IGetSpecifiedRoleUseCase implements IGetSpecifiedRoleUseCase {
+export class GetSpecifiedRoleUseCase implements IGetSpecifiedRoleUseCase {
   constructor(
     @Inject(IProjectRolesRepository)
     private readonly projectRolesRepository: IProjectRolesRepository,

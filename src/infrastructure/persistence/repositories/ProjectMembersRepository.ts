@@ -11,4 +11,12 @@ export class ProjectMembersRepository
   constructor() {
     super(ProjectMembers)
   }
+
+  async findByUserId(userId: string) {
+    return await this.findOne({
+      where: {
+        userId,
+      },
+    })
+  }
 }
