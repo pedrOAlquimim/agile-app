@@ -7,7 +7,7 @@ import { Projects_ProjectMembers } from 'src/core/entities/Projects_ProjectMembe
 import { IProjectMembersRepository } from 'src/core/interfaces/repositories/IProjectMembersRepository.interface'
 import { IProjectRepository } from 'src/core/interfaces/repositories/IProjectRepository.interface'
 import { IProjectRolesRepository } from 'src/core/interfaces/repositories/IProjectRolesRepository.interface'
-import { IProjects_ProjectMembers } from 'src/core/interfaces/repositories/IProjects_ProjectMembers.interface'
+import { IProjects_ProjectMembersRepository } from 'src/core/interfaces/repositories/IProjects_ProjectMembers.interface'
 import { ICreateNewProjectUseCase } from 'src/core/interfaces/useCases/project/ICreateNewProjectUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
@@ -20,8 +20,8 @@ export class CreateNewProjectUseCase implements ICreateNewProjectUseCase {
     @Inject(IProjectMembersRepository)
     private readonly projectMemberRepository: IProjectMembersRepository,
 
-    @Inject(IProjects_ProjectMembers)
-    private readonly projects_projectsMembersRepository: IProjects_ProjectMembers,
+    @Inject(IProjects_ProjectMembersRepository)
+    private readonly projects_projectsMembersRepository: IProjects_ProjectMembersRepository,
 
     @Inject(IProjectRolesRepository)
     private readonly projectRoleRepository: IProjectRolesRepository,
@@ -46,6 +46,7 @@ export class CreateNewProjectUseCase implements ICreateNewProjectUseCase {
         created_at: new Date(),
         title: input.title,
         projects_projectMembers: [],
+        column: [],
       }
 
       const role = await this.projectRoleRepository.findByRole('admin')
