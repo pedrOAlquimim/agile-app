@@ -5,6 +5,8 @@ import { CustomResponse } from 'src/core/response/customResponse'
 export interface IUpdateProjectUseCase {
   execute: (
     input: UpdateProjectDTOInput,
-    userId: string,
+    projectId: string,
   ) => Promise<CustomResponse<Project>>
 }
+
+export const IUpdateProjectUseCase = Symbol('IUpdateProjectUseCase')

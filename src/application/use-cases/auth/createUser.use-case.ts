@@ -38,7 +38,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
 
       await this.userRepository.add({ ...newUser })
 
-      const result: UserDTO = Object.assign(newUser)
+      const result: UserDTO = { ...newUser }
 
       response.data = result
 

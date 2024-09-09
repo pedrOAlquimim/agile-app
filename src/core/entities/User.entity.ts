@@ -3,10 +3,7 @@ import { BaseEntity } from './BaseEntity'
 
 @Entity('users')
 export class User extends BaseEntity {
-  @Column({
-    type: 'char',
-    length: 50,
-  })
+  @Column('varchar')
   email: string
 
   @Column('varchar')

@@ -7,14 +7,22 @@ import { ICreateUserUseCase } from 'src/core/interfaces/useCases/auth/ICreateUse
 import { IUserRepository } from 'src/core/interfaces/repositories/IUserRepository.interface'
 import { IAuthenticateUserUseCase } from 'src/core/interfaces/useCases/auth/IAuthenticateUserUseCase.interface'
 import { AnthenticateUserUseCase } from 'src/application/use-cases/auth/authenticateUser.use-case'
-import { JwtService } from '@nestjs/jwt'
+import { JwtModule, JwtService } from '@nestjs/jwt'
 import { RefreshJwtGuard } from '../utils/guards/refreshJwtGuard.guard'
 import { JwtGuard } from '../utils/guards/jwtGuard.guard'
 import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/auth/IRefreshTokenUseCase.interface'
 import { RefreshTokenUseCase } from 'src/application/use-cases/auth/refreshToken.use-case'
+import { env } from 'src/@env'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserRepository])],
+  imports: [
+    TypeOrmModule.forFeature([UserRepository]),
+    JwtModule.register({
+      global: true,
+      secret: env.JWT_SECRET_KEY,
+      signOptions: { expiresIn: '20s' },
+    }),
+  ],
   controllers: [AuthController],
   providers: [
     JwtService,

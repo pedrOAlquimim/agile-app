@@ -12,11 +12,11 @@ export class UpdateProjectUseCase implements IUpdateProjectUseCase {
     private readonly projectRepository: IProjectRepository,
   ) {}
 
-  async execute(input: UpdateProjectDTOInput, userId: string) {
+  async execute(input: UpdateProjectDTOInput, projectId: string) {
     try {
       const response = new CustomResponse<Project>()
 
-      const project = await this.projectRepository.findById(userId)
+      const project = await this.projectRepository.findById(projectId)
 
       if (!project) return response.addError(['Project does not exist'])
 
