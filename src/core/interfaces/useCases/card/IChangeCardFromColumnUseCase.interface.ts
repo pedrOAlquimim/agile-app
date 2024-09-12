@@ -2,10 +2,12 @@ import { ChangeCardFromColumnDTOInput } from 'src/core/dtos/changeCardFromColumn
 import { ColumnCard } from 'src/core/entities/ColumnCard.entity'
 import { CustomResponse } from 'src/core/response/customResponse'
 
-export interface IChangeCardColumnUseCase {
+export interface IChangeCardFromColumnUseCase {
   execute: (
     input: ChangeCardFromColumnDTOInput,
   ) => Promise<CustomResponse<ColumnCard>>
 }
 
-export const IChangeCardColumnUseCase = Symbol('IChangeCardColumnUseCase')
+export const IChangeCardFromColumnUseCase = Symbol(
+  'IChangeCardFromColumnUseCase',
+)

@@ -7,7 +7,7 @@ import { IColumnRepository } from 'src/core/interfaces/repositories/IColumnRepos
 import { ICreateNewCardUseCase } from 'src/core/interfaces/useCases/card/ICreateNewCardUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
-export class CreateCardUseCase implements ICreateNewCardUseCase {
+export class CreateNewCardUseCase implements ICreateNewCardUseCase {
   constructor(
     @Inject(ICardRepository)
     private readonly cardRepository: ICardRepository,
