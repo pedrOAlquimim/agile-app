@@ -7,14 +7,11 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
 } from 'typeorm'
+import { BaseEntity } from './BaseEntity'
 
 @Entity('columns')
-export class ColumnCard {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class ColumnCard extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 30,
@@ -30,7 +27,9 @@ export class ColumnCard {
   @CreateDateColumn()
   created_at: Date
 
-  @OneToMany(() => Card, (card) => card.column)
+  @OneToMany(() => Card, (card) => card.column, {
+    onDelete: 'CASCADE',
+  })
   cards: Card[]
 
   @ManyToOne(() => Project, (project) => project.column)

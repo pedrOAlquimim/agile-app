@@ -1,17 +1,9 @@
+import { BaseEntity } from './BaseEntity'
 import { ColumnCard } from './ColumnCard.entity'
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm'
+import { Column, CreateDateColumn, Entity, ManyToOne } from 'typeorm'
 
 @Entity('cards')
-export class Card {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class Card extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 30,
