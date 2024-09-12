@@ -4,6 +4,9 @@ import { dataSourceOptions } from './infrastructure/persistence/config/dataSourc
 import { AuthModule } from './api/controllers/auth.module'
 import { ContactModule } from './api/controllers/contact.module'
 import { ProjectRoleModule } from './api/controllers/projectRole.module'
+import { ProjectModule } from './api/controllers/project.module'
+import { ColumnModule } from './api/controllers/column.module'
+import { CardModule } from './api/controllers/card.module'
 
 @Module({
   imports: [
@@ -11,6 +14,10 @@ import { ProjectRoleModule } from './api/controllers/projectRole.module'
     AuthModule,
     ContactModule,
     ProjectRoleModule,
+    ProjectModule,
+    ProjectRoleModule,
+    ColumnModule,
+    CardModule,
   ],
   controllers: [],
   providers: [],
