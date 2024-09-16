@@ -51,7 +51,10 @@ export class ProjectController {
   }
 
   @Delete(':projectId')
-  async deleteProject(@Param() projectId: string, @Res() response: Response) {
+  async deleteProject(
+    @Param('projectId') projectId: string,
+    @Res() response: Response,
+  ) {
     const result = await this.deleteProjectUseCase.execute(projectId)
 
     if (!result.success) return response.status(404).send(result)
@@ -61,7 +64,7 @@ export class ProjectController {
 
   @Put(':projectId')
   async updateProject(
-    @Param() projectId: string,
+    @Param('projectId') projectId: string,
     @Body(new ZodPipe(updateProjectDTOInputSchema))
     input: UpdateProjectDTOInput,
     @Res() response: Response,

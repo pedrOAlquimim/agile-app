@@ -47,7 +47,10 @@ export class ProjectRoleController {
 
   @UseGuards(JwtGuard)
   @Get(':roleName')
-  async getByRoleName(@Param() roleName: string, @Res() response: Response) {
+  async getByRoleName(
+    @Param('roleName') roleName: string,
+    @Res() response: Response,
+  ) {
     const result = await this.getSpecifiedRoleUseCase.execute(roleName)
 
     if (!response) return response.status(404).send(result)

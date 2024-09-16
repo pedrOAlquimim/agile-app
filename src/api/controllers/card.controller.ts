@@ -50,7 +50,7 @@ export class CardController {
 
   @Get('fetchCardByColumn/:columnId')
   async fetchCardByColumn(
-    @Param() columnId: string,
+    @Param('columnId') columnId: string,
     @Res() response: Response,
   ) {
     const result = await this.fetchCardByColumnUseCase.execute(columnId)
@@ -74,7 +74,10 @@ export class CardController {
   }
 
   @Delete(':columnId')
-  async deleteCard(@Param() columnId: string, @Res() response: Response) {
+  async deleteCard(
+    @Param('columnId') columnId: string,
+    @Res() response: Response,
+  ) {
     const result = await this.deleteCardUseCase.execute(columnId)
 
     if (!result.success) return response.status(404).send(result)

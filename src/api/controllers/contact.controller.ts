@@ -54,14 +54,14 @@ export class ContactController {
 
   @UseGuards(JwtGuard)
   @Get(':userId')
-  async getContactsByUserId(@Param() userId: string) {
+  async getContactsByUserId(@Param('userId') userId: string) {
     return await this.getContactsByUserUseCase.execute(userId)
   }
 
   @UseGuards(JwtGuard)
   @Delete(':contactId')
   async deleteContactById(
-    @Param() contactId: string,
+    @Param('contactId') contactId: string,
     @Res() response: Response,
   ) {
     const result = await this.deleteContactUseCase.execute(contactId)
@@ -74,7 +74,7 @@ export class ContactController {
   @UseGuards(JwtGuard)
   @Put(':contactId')
   async updateContact(
-    @Param() contactId: string,
+    @Param('contactId') contactId: string,
     @Body(new ZodPipe(updateContactDTOSchema)) input: UpdateContactDTOInput,
     @Res() response: Response,
   ) {

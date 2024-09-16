@@ -42,7 +42,7 @@ export class ColumnController {
 
   @Get(':projectId')
   async fetchColumnsByProjectId(
-    @Param() projectId: string,
+    @Param('projectId') projectId: string,
     @Res() response: Response,
   ) {
     const result = await this.selectColumnByProjectUseCase.execute(projectId)
@@ -53,7 +53,10 @@ export class ColumnController {
   }
 
   @Delete(':columnId')
-  async deleteColumn(@Param() columnId: string, @Res() response: Response) {
+  async deleteColumn(
+    @Param('columnId') columnId: string,
+    @Res() response: Response,
+  ) {
     const result = await this.deleteColumnUseCase.execute(columnId)
 
     if (!result.success) return response.status(404).send(result)
