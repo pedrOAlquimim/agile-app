@@ -17,6 +17,8 @@ import { IGetProjectsByUserUseCase } from 'src/core/interfaces/useCases/project/
 import { GetProjectsByUserUseCase } from 'src/application/use-cases/project/getProjectsByUser.use-case'
 import { IUpdateProjectUseCase } from 'src/core/interfaces/useCases/project/IupdateProjectUseCse.interface'
 import { UpdateProjectUseCase } from 'src/application/use-cases/project/updateProject.use-case'
+import { ICreateNewProjectUseCase } from 'src/core/interfaces/useCases/project/ICreateNewProjectUseCase.interface'
+import { CreateNewProjectUseCase } from 'src/application/use-cases/project/createNewProject.use-case'
 
 @Module({
   imports: [
@@ -59,6 +61,10 @@ import { UpdateProjectUseCase } from 'src/application/use-cases/project/updatePr
       provide: IUpdateProjectUseCase,
       useClass: UpdateProjectUseCase,
     },
+    {
+      provide: ICreateNewProjectUseCase,
+      useClass: CreateNewProjectUseCase,
+    },
   ],
   exports: [
     {
@@ -72,6 +78,10 @@ import { UpdateProjectUseCase } from 'src/application/use-cases/project/updatePr
     {
       provide: IUpdateProjectUseCase,
       useClass: UpdateProjectUseCase,
+    },
+    {
+      provide: ICreateNewProjectUseCase,
+      useClass: CreateNewProjectUseCase,
     },
   ],
 })

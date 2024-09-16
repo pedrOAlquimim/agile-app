@@ -32,7 +32,6 @@ export class ProjectRoleController {
     private getAllRolesUseCase: IGetAllRolesUseCase,
   ) {}
 
-  @UseGuards(JwtGuard)
   @Post()
   async createNewRole(
     @Body(new ZodPipe(addProjectRoleDTOInputSchema))
@@ -43,7 +42,7 @@ export class ProjectRoleController {
 
     if (!result.success) return response.status(409).send(result)
 
-    return result
+    return response.status(204).send()
   }
 
   @UseGuards(JwtGuard)

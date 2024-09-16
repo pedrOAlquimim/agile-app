@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { ICardRepository } from 'src/core/interfaces/repositories/ICardRepository.interface'
-import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IdeleteCardUseCase.interface'
+import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IDeleteCardUseCase.interface'
 import { CustomResponse } from 'src/core/response/customResponse'
 
 export class DeleteCardUseCase implements IDeleteCardUseCase {

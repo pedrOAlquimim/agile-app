@@ -10,6 +10,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: env.DB_DATABASE,
   entities: ['dist/core/entities/*.entity.js'],
   migrations: ['dist/infrastructure/persistence/migrations/*.js'],
+  logging: true,
 }
 
 const dataSource = new DataSource(dataSourceOptions)

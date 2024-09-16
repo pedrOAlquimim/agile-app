@@ -10,7 +10,7 @@ import { ChangeCardFromColumnUseCase } from 'src/application/use-cases/card/chan
 import { IChangeCardFromColumnUseCase } from 'src/core/interfaces/useCases/card/IChangeCardFromColumnUseCase.interface'
 import { ICreateNewCardUseCase } from 'src/core/interfaces/useCases/card/ICreateNewCardUseCase.interface'
 import { CreateNewCardUseCase } from 'src/application/use-cases/card/createNewCard.use-case'
-import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IdeleteCardUseCase.interface'
+import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IDeleteCardUseCase.interface'
 import { DeleteCardUseCase } from 'src/application/use-cases/card/deleteCard.use-case'
 import { IFetchCardByColumnUseCase } from 'src/core/interfaces/useCases/card/IFetchCardByColumnUseCase.interface'
 import { FetchCardByColumnUseCase } from 'src/application/use-cases/card/fetchCardByColumn.use-case'

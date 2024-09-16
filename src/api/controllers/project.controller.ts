@@ -41,12 +41,13 @@ export class ProjectController {
 
   @Post(':userId')
   async createNewProject(
-    @Param() userId: string,
+    @Param('userId') userId: string,
     @Body(new ZodPipe(createProjectInputDTOSchema))
     input: CreateProjectInputDTO,
+    @Res() response: Response,
   ) {
     const result = await this.createNewProjectUseCase.execute(input, userId)
-    return result
+    return response.status(201).send(result)
   }
 
   @Delete(':projectId')

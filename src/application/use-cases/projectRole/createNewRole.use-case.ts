@@ -13,7 +13,7 @@ export class CreateNewRoleUseCase implements ICreateNewRoleUseCase {
 
   async execute(roleName: string) {
     try {
-      const response = new CustomResponse<void>()
+      const response = new CustomResponse<null>()
 
       const role = await this.projectRoleRepository.findByRole(roleName)
 
@@ -25,6 +25,8 @@ export class CreateNewRoleUseCase implements ICreateNewRoleUseCase {
         created_at: new Date(),
       }
       await this.projectRoleRepository.add(newRole)
+
+      return response
     } catch (ex) {
       throw new Error(ex.message)
     }

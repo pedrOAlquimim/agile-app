@@ -1,6 +1,6 @@
 import { IChangeCardFromColumnUseCase } from 'src/core/interfaces/useCases/card/IChangeCardFromColumnUseCase.interface'
 import { ICreateNewCardUseCase } from 'src/core/interfaces/useCases/card/ICreateNewCardUseCase.interface'
-import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IdeleteCardUseCase.interface'
+import { IDeleteCardUseCase } from 'src/core/interfaces/useCases/card/IDeleteCardUseCase.interface'
 import { IFetchCardByColumnUseCase } from 'src/core/interfaces/useCases/card/IFetchCardByColumnUseCase.interface'
 import { IUpdateCardUseCase } from 'src/core/interfaces/useCases/card/IUpdateCardUseCase.interface'
 import { ZodPipe } from '../utils/pipes/zodPipe.pipe'
