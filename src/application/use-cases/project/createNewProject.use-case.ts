@@ -62,31 +62,31 @@ export class CreateNewProjectUseCase implements ICreateNewProjectUseCase {
       }
 
       if (existingProjectMember) {
-        Promise.all([
-          this.projectRepository.add(newProject),
-          this.projects_projectsMembersRepository.add(
-            newProjects_ProjectMember,
-          ),
-        ])
+        existingProjectMember.projects_projectMembers = [
+          newProjects_ProjectMember,
+        ]
+
+        await this.projectRepository.add(newProject)
+        await this.projects_projectsMembersRepository.add(
+          newProjects_ProjectMember,
+        )
       }
 
       if (!existingProjectMember) {
-        Promise.all([
-          this.projectMemberRepository.add(newProjectMember),
-          this.projectRepository.add(newProject),
-          this.projects_projectsMembersRepository.add(
-            newProjects_ProjectMember,
-          ),
-        ])
+        newProjectMember.projects_projectMembers = [newProjects_ProjectMember]
+
+        await this.projectRepository.add(newProject)
+        await this.projectMemberRepository.add(newProjectMember)
+        await this.projects_projectsMembersRepository.add(
+          newProjects_ProjectMember,
+        )
       }
 
-      const project = await this.projectRepository.findById(newProject.id)
+      const projectr = await this.projectRepository.getProjectById(
+        newProject.id,
+      )
 
-      const createdProject = {
-        ...project,
-      }
-
-      response.data = createdProject
+      response.data = projectr
 
       return response
     } catch (error) {

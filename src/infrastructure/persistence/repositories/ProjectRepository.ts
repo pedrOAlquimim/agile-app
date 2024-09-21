@@ -27,4 +27,13 @@ export class ProjectRepository
       ],
     })
   }
+
+  async getProjectById(projectId: string): Promise<Project> {
+    return await this.findOne({
+      where: {
+        id: projectId,
+      },
+      relations: ['projects_projectMembers.projectMember'],
+    })
+  }
 }
