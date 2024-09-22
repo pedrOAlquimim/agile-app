@@ -73,6 +73,6 @@ export class ProjectController {
 
     if (!result.success) return response.status(404).send(result)
 
-    return result
+    return response.status(201).send(result)
   }
 }
