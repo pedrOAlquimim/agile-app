@@ -32,6 +32,7 @@ export class ProjectRoleController {
     private getAllRolesUseCase: IGetAllRolesUseCase,
   ) {}
 
+  @UseGuards(JwtGuard)
   @Post()
   async createNewRole(
     @Body(new ZodPipe(addProjectRoleDTOInputSchema))
@@ -53,15 +54,15 @@ export class ProjectRoleController {
   ) {
     const result = await this.getSpecifiedRoleUseCase.execute(roleName)
 
-    if (!response) return response.status(404).send(result)
+    if (!result.success) return response.status(404).send(result)
 
-    return result
+    return response.status(200).send(result)
   }
 
   @UseGuards(JwtGuard)
   @Get()
-  async getAllRoles() {
+  async getAllRoles(@Res() response: Response) {
     const result = await this.getAllRolesUseCase.execute()
-    return result
+    return response.status(200).send(result)
   }
 }
