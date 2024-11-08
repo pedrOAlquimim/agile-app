@@ -61,7 +61,7 @@ export class ColumnController {
 
     if (!result.success) return response.status(404).send(result)
 
-    return response.status(204)
+    return response.status(204).send()
   }
 
   @Post()
