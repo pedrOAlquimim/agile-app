@@ -1,12 +1,7 @@
 import dataSource from '../config/dataSource'
 import { BaseEntity } from 'src/core/entities/BaseEntity'
 import { IBaseRepository } from 'src/core/interfaces/repositories/IBaseRepository.interface'
-import {
-  Repository,
-  FindOptionsWhere,
-  EntityTarget,
-  DeleteResult,
-} from 'typeorm'
+import { Repository, FindOptionsWhere, EntityTarget } from 'typeorm'
 
 export abstract class BaseRepository<TEntity extends BaseEntity>
   extends Repository<TEntity>
@@ -28,8 +23,8 @@ export abstract class BaseRepository<TEntity extends BaseEntity>
     return await this.save(existingData)
   }
 
-  async deleteData(id: string): Promise<DeleteResult> {
-    return await this.delete(id)
+  async deleteData(id: string): Promise<TEntity> {
+    return await this.delete(id).then((res) => res.raw)
   }
 
   async findById(id: string): Promise<TEntity> {

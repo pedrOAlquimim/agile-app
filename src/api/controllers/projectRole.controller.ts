@@ -43,7 +43,7 @@ export class ProjectRoleController {
 
     if (!result.success) return response.status(409).send(result)
 
-    return response.status(204).send()
+    return response.status(204).send(result)
   }
 
   @UseGuards(JwtGuard)
