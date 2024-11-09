@@ -4,7 +4,7 @@ import { CreateNewRoleUseCase } from './createNewRole.use-case'
 let inMemoryProjectRoleRepository: InMemoryProjectRoleRepository
 let sut: CreateNewRoleUseCase
 
-describe('Crete new Project Role use caase', () => {
+describe('Crete new Project Role use case', () => {
   beforeEach(() => {
     inMemoryProjectRoleRepository = new InMemoryProjectRoleRepository()
     sut = new CreateNewRoleUseCase(inMemoryProjectRoleRepository)
