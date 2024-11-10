@@ -43,7 +43,7 @@ export class CreateNewColumnUseCase implements ICreateNewColumnUseCase {
       }
 
       if (column.length > 0) {
-        const lastColumn = column[column.length]
+        const lastColumn = column[column.length - 1]
         const newColumn: ColumnCard = {
           id: randomUUID(),
           title: input.title,

@@ -5,7 +5,7 @@ let inMemoryProjectRoleRepository: InMemoryProjectRoleRepository
 let sut: GetSpecifiedRoleUseCase
 
 describe('Get all roles use case', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryProjectRoleRepository = new InMemoryProjectRoleRepository()
     sut = new GetSpecifiedRoleUseCase(inMemoryProjectRoleRepository)
   })
