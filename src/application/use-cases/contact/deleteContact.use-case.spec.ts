@@ -1,5 +1,5 @@
-import { InMemoryContactRepository } from "src/infrastructure/persistence/in-memory/in-memory-contact-repository"
-import { DeleteContactUseCase } from "./deleteContact.use-case"
+import { InMemoryContactRepository } from 'src/infrastructure/persistence/in-memory/in-memory-contact-repository'
+import { DeleteContactUseCase } from './deleteContact.use-case'
 
 describe('Delete contact use case', () => {
   let sut: DeleteContactUseCase

@@ -1,6 +1,6 @@
-import { InMemoryCardRepository } from "src/infrastructure/persistence/in-memory/in-memory-card-repository"
-import { DeleteCardUseCase } from "./deleteCard.use-case"
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
+import { InMemoryCardRepository } from 'src/infrastructure/persistence/in-memory/in-memory-card-repository'
+import { DeleteCardUseCase } from './deleteCard.use-case'
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
 
 describe('Change card from column use case', () => {
   let inMemoryCardRepository: InMemoryCardRepository
@@ -29,7 +29,7 @@ describe('Change card from column use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const card = await inMemoryCardRepository.add({
@@ -37,7 +37,7 @@ describe('Change card from column use case', () => {
       title: 'Card title',
       description: 'Card description',
       column,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute(card.id)
@@ -62,7 +62,7 @@ describe('Change card from column use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { errors, success } = await sut.execute('cardId')

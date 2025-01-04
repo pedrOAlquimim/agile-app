@@ -1,18 +1,14 @@
-import { InMemoryCardRepository } from "src/infrastructure/persistence/in-memory/in-memory-card-repository"
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
-import { UpdateCardUseCase } from "./updateCard.use-case"
+import { InMemoryCardRepository } from 'src/infrastructure/persistence/in-memory/in-memory-card-repository'
+import { UpdateCardUseCase } from './updateCard.use-case'
 
 describe('Change card from column use case', () => {
   let inMemoryCardRepository: InMemoryCardRepository
-  let inMemoryColumnRepository: InMemoryColumnRepository
   let sut: UpdateCardUseCase
 
   beforeEach(() => {
     inMemoryCardRepository = new InMemoryCardRepository()
-    inMemoryColumnRepository = new InMemoryColumnRepository()
     sut = new UpdateCardUseCase(inMemoryCardRepository)
   })
-
 
   it('should be able update a card', async () => {
     const project = {
@@ -30,7 +26,7 @@ describe('Change card from column use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     }
 
     const card = await inMemoryCardRepository.add({
@@ -38,7 +34,7 @@ describe('Change card from column use case', () => {
       title: 'Card title',
       description: 'Card description',
       column,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute({
@@ -52,7 +48,7 @@ describe('Change card from column use case', () => {
       expect.objectContaining({
         title: 'New title',
         description: 'New description',
-      })
+      }),
     )
   })
 

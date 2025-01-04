@@ -1,6 +1,6 @@
-import { InMemoryContactRepository } from "src/infrastructure/persistence/in-memory/in-memory-contact-repository"
-import { CreateContactUseCase } from "./createContact.use-case"
-import { randomUUID } from "crypto"
+import { InMemoryContactRepository } from 'src/infrastructure/persistence/in-memory/in-memory-contact-repository'
+import { CreateContactUseCase } from './createContact.use-case'
+import { randomUUID } from 'crypto'
 
 describe('Create contact use case', () => {
   let inMemoryContactRepository: InMemoryContactRepository

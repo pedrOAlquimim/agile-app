@@ -1,6 +1,6 @@
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
-import { SelectColumnsByProjectUseCase } from "./selectColumnsByProject.use-case"
-import { InMemoryProjectRepository } from "src/infrastructure/persistence/in-memory/in-memory-project-repository"
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
+import { SelectColumnsByProjectUseCase } from './selectColumnsByProject.use-case'
+import { InMemoryProjectRepository } from 'src/infrastructure/persistence/in-memory/in-memory-project-repository'
 
 describe('', () => {
   let inMemoryColumnRepository: InMemoryColumnRepository
@@ -22,7 +22,7 @@ describe('', () => {
       title: 'Test project',
       column: [],
       projects_projectMembers: [],
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const project = await inMemoryProjectRepository.getProjectById('projectId')
@@ -34,7 +34,7 @@ describe('', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute('projectId')
@@ -48,8 +48,8 @@ describe('', () => {
         cards: [],
         nextColumnId: null,
         previusColumnId: null,
-        created_at: expect.any(Date)
-      }
+        created_at: expect.any(Date),
+      },
     ])
   })
 
@@ -67,7 +67,7 @@ describe('', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { errors, success } = await sut.execute('1234')

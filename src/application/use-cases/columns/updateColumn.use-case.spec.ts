@@ -1,5 +1,5 @@
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
-import { UpdateColumnUseCase } from "./updateColumn.use-case"
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
+import { UpdateColumnUseCase } from './updateColumn.use-case'
 
 describe('Update column use case', () => {
   let inMemoryColumnRepository: InMemoryColumnRepository
@@ -7,7 +7,7 @@ describe('Update column use case', () => {
 
   beforeEach(() => {
     inMemoryColumnRepository = new InMemoryColumnRepository()
-    sut = new UpdateColumnUseCase(inMemoryColumnRepository) 
+    sut = new UpdateColumnUseCase(inMemoryColumnRepository)
   })
 
   it('should be able update a column', async () => {
@@ -23,7 +23,7 @@ describe('Update column use case', () => {
         column: [],
         created_at: new Date('2024-12-22T14:00:00.000Z'),
         title: 'ProjectLabel',
-        projects_projectMembers: []
+        projects_projectMembers: [],
       },
     })
 
@@ -45,7 +45,7 @@ describe('Update column use case', () => {
         column: [],
         created_at: expect.any(Date),
         title: 'ProjectLabel',
-        projects_projectMembers: []
+        projects_projectMembers: [],
       },
     })
   })

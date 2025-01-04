@@ -1,5 +1,5 @@
-import { InMemoryContactRepository } from "src/infrastructure/persistence/in-memory/in-memory-contact-repository"
-import { GetContactByUserUseCase } from "./getContactsByUser.use-case"
+import { InMemoryContactRepository } from 'src/infrastructure/persistence/in-memory/in-memory-contact-repository'
+import { GetContactByUserUseCase } from './getContactsByUser.use-case'
 
 describe('Get contacts by user', () => {
   let sut: GetContactByUserUseCase

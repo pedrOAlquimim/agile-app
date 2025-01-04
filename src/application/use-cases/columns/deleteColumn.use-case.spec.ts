@@ -1,5 +1,5 @@
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
-import { DeleteColumnUseCase } from "./deleteColumn.use-case"
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
+import { DeleteColumnUseCase } from './deleteColumn.use-case'
 
 describe('Delete column use case', () => {
   let inMemoryColumnRepository: InMemoryColumnRepository
@@ -19,12 +19,12 @@ describe('Delete column use case', () => {
         title: 'Test project',
         column: [],
         projects_projectMembers: [],
-        created_at: new Date()
+        created_at: new Date(),
       },
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute('columnId')
@@ -38,12 +38,12 @@ describe('Delete column use case', () => {
         title: 'Test project',
         column: [],
         projects_projectMembers: [],
-        created_at: expect.any(Date)
+        created_at: expect.any(Date),
       },
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: expect.any(Date)
+      created_at: expect.any(Date),
     })
   })
 

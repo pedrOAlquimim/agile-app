@@ -1,6 +1,6 @@
-import { InMemoryCardRepository } from "src/infrastructure/persistence/in-memory/in-memory-card-repository"
-import { FetchCardByColumnUseCase } from "./fetchCardByColumn.use-case"
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
+import { InMemoryCardRepository } from 'src/infrastructure/persistence/in-memory/in-memory-card-repository'
+import { FetchCardByColumnUseCase } from './fetchCardByColumn.use-case'
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
 
 describe('Change card from column use case', () => {
   let inMemoryCardRepository: InMemoryCardRepository
@@ -32,7 +32,7 @@ describe('Change card from column use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     await inMemoryCardRepository.add({
@@ -40,7 +40,7 @@ describe('Change card from column use case', () => {
       title: 'Card title',
       description: 'Card description',
       column,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     await inMemoryCardRepository.add({
@@ -48,7 +48,7 @@ describe('Change card from column use case', () => {
       title: 'Card title 2',
       description: 'Card description',
       column,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute(column.id)
@@ -62,7 +62,7 @@ describe('Change card from column use case', () => {
       expect.objectContaining({
         id: 'cardId2',
         title: 'Card title 2',
-      })
+      }),
     ])
   })
 

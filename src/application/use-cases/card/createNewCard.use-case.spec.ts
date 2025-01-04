@@ -1,6 +1,6 @@
-import { InMemoryCardRepository } from "src/infrastructure/persistence/in-memory/in-memory-card-repository"
-import { CreateNewCardUseCase } from "./createNewCard.use-case"
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
+import { InMemoryCardRepository } from 'src/infrastructure/persistence/in-memory/in-memory-card-repository'
+import { CreateNewCardUseCase } from './createNewCard.use-case'
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
 
 describe('Create new card use case', () => {
   let inMemoryCardRepository: InMemoryCardRepository
@@ -32,13 +32,13 @@ describe('Create new card use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
-    
+
     const { data, success } = await sut.execute({
       columnId: column.id,
       title: 'New card',
-      description: 'New card description'
+      description: 'New card description',
     })
 
     expect(success).toBe(true)
@@ -51,11 +51,10 @@ describe('Create new card use case', () => {
   })
 
   it('should not be able to create a card when does not exist a column', async () => {
-
     const { errors, success } = await sut.execute({
       columnId: 'columnId',
       title: 'New card',
-      description: 'New card description'
+      description: 'New card description',
     })
 
     expect(success).toBe(false)

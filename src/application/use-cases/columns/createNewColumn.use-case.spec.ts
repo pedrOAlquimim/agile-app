@@ -1,12 +1,12 @@
-import { InMemoryColumnRepository } from "src/infrastructure/persistence/in-memory/in-memory-column-repository"
-import { CreateNewColumnUseCase } from "./createNewColumn.use-case"
-import { InMemoryProjectRepository } from "src/infrastructure/persistence/in-memory/in-memory-project-repository"
+import { InMemoryColumnRepository } from 'src/infrastructure/persistence/in-memory/in-memory-column-repository'
+import { CreateNewColumnUseCase } from './createNewColumn.use-case'
+import { InMemoryProjectRepository } from 'src/infrastructure/persistence/in-memory/in-memory-project-repository'
 
 describe('Create new column use case', () => {
   let inMemoryColumnRepository: InMemoryColumnRepository
   let inMemoryProjectRepository: InMemoryProjectRepository
   let sut: CreateNewColumnUseCase
-  
+
   beforeEach(() => {
     inMemoryColumnRepository = new InMemoryColumnRepository()
     inMemoryProjectRepository = new InMemoryProjectRepository()
@@ -32,7 +32,7 @@ describe('Create new column use case', () => {
       title: 'Test project',
       column: [],
       projects_projectMembers: [],
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const project = await inMemoryProjectRepository.getProjectById('projectId')
@@ -41,7 +41,6 @@ describe('Create new column use case', () => {
       projectId: project.id,
       title: 'New column',
     })
-
 
     expect(success).toBe(true)
     expect(data).toEqual(
@@ -58,7 +57,7 @@ describe('Create new column use case', () => {
       title: 'Test project',
       column: [],
       projects_projectMembers: [],
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const project = await inMemoryProjectRepository.getProjectById('projectId')
@@ -70,7 +69,7 @@ describe('Create new column use case', () => {
       cards: [],
       nextColumnId: null,
       previusColumnId: null,
-      created_at: new Date()
+      created_at: new Date(),
     })
 
     const { data, success } = await sut.execute({
@@ -78,13 +77,12 @@ describe('Create new column use case', () => {
       title: 'New column',
     })
 
-
     expect(success).toBe(true)
     expect(data).toEqual(
       expect.objectContaining({
         id: expect.any(String),
         title: 'New column',
-        previusColumnId: previusColumn.id 
+        previusColumnId: previusColumn.id,
       }),
     )
   })
