@@ -7,9 +7,13 @@ import { ProjectRoleModule } from './api/controllers/projectRole.module'
 import { ProjectModule } from './api/controllers/project.module'
 import { ColumnModule } from './api/controllers/column.module'
 import { CardModule } from './api/controllers/card.module'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
     ContactModule,
