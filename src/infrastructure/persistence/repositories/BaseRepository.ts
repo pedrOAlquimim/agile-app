@@ -1,13 +1,12 @@
-import dataSource from '../config/dataSource'
 import { BaseEntity } from 'src/core/entities/BaseEntity'
 import { IBaseRepository } from 'src/core/interfaces/repositories/IBaseRepository.interface'
-import { Repository, FindOptionsWhere, EntityTarget } from 'typeorm'
+import { Repository, FindOptionsWhere, EntityTarget, DataSource } from 'typeorm'
 
 export abstract class BaseRepository<TEntity extends BaseEntity>
   extends Repository<TEntity>
   implements IBaseRepository<TEntity>
 {
-  constructor(entity: EntityTarget<TEntity>) {
+  constructor(entity: EntityTarget<TEntity>, dataSource: DataSource) {
     super(entity, dataSource.manager)
   }
 

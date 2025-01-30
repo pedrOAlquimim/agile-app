@@ -2,13 +2,14 @@ import { ICardRepository } from 'src/core/interfaces/repositories/ICardRepositor
 import { BaseRepository } from './BaseRepository'
 import { Card } from 'src/core/entities/Card.entity'
 import { ColumnCard } from 'src/core/entities/ColumnCard.entity'
+import { DataSource } from 'typeorm'
 
 export class CardRepository
   extends BaseRepository<Card>
   implements ICardRepository
 {
-  constructor() {
-    super(Card)
+  constructor(dataSource: DataSource) {
+    super(Card, dataSource)
   }
 
   async findByColumn(column: ColumnCard) {

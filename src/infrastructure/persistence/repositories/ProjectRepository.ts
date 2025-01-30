@@ -2,14 +2,15 @@ import { Project } from 'src/core/entities/Project.entity'
 import { BaseRepository } from './BaseRepository'
 import { IProjectRepository } from 'src/core/interfaces/repositories/IProjectRepository.interface'
 import { Injectable } from '@nestjs/common'
+import { DataSource } from 'typeorm'
 
 @Injectable()
 export class ProjectRepository
   extends BaseRepository<Project>
   implements IProjectRepository
 {
-  constructor() {
-    super(Project)
+  constructor(dataSource: DataSource) {
+    super(Project, dataSource)
   }
 
   async getProjectsByUserId(userId: string): Promise<Project[]> {

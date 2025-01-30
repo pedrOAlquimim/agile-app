@@ -1,13 +1,14 @@
 import { ProjectRoles } from 'src/core/entities/ProjectRoles.entity'
 import { BaseRepository } from './BaseRepository'
 import { IProjectRolesRepository } from 'src/core/interfaces/repositories/IProjectRolesRepository.interface'
+import { DataSource } from 'typeorm'
 
 export class ProjectRolesRepository
   extends BaseRepository<ProjectRoles>
   implements IProjectRolesRepository
 {
-  constructor() {
-    super(ProjectRoles)
+  constructor(dataSource: DataSource) {
+    super(ProjectRoles, dataSource)
   }
 
   async findByRole(role: string) {

@@ -7,13 +7,13 @@ export class Contact extends BaseEntity {
   name: string
 
   @Column({
-    type: 'char',
+    type: 'varchar',
     length: 50,
   })
   email: string
 
   @Column({
-    type: 'char',
+    type: 'varchar',
     length: 30,
   })
   phone: string
