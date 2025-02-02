@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcrypt'
 import { env } from 'src/@env'
@@ -21,7 +21,9 @@ export class AnthenticateUserUseCase implements IAuthenticateUserUseCase {
     try {
       const response = new CustomResponse<AuthenticateDTO>()
 
-      const user = await this.validateUser(input)
+      const { user, errors } = await this.validateUser(input)
+
+      if (!user) return response.addError(errors)
 
       const payload = {
         username: user.email,
@@ -47,21 +49,27 @@ export class AnthenticateUserUseCase implements IAuthenticateUserUseCase {
 
       return response
     } catch (ex) {
-      throw new Error('error')
+      throw new Error(ex)
     }
   }
 
-  private async validateUser(input: LoginDTO): Promise<UserDTO> {
-    const user = await this.userRepository.findByEmail(input.email)
+  private async validateUser(input: LoginDTO) {
+    const existUser = await this.userRepository.findByEmail(input.email)
 
-    if (user && (await compare(input.password, user.password))) {
+    if (existUser && (await compare(input.password, existUser.password))) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...rest } = user
+      const { password, ...rest } = existUser
       const result: UserDTO = rest
 
-      return result
+      return {
+        user: result,
+        errors: null,
+      }
     }
 
-    throw new UnauthorizedException()
+    return {
+      errors: ['Email or password is wrong'],
+      user: null,
+    }
   }
 }

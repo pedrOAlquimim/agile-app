@@ -41,13 +41,19 @@ export class AuthController {
 
     if (!result.success) return response.status(409).send(result)
 
-    return result
+    return response.status(201).send(result)
   }
 
   @Post('login')
-  async login(@Body(new ZodPipe(loginDTOSchema)) input: LoginDTO) {
-    const response = await this.authenticateUserUseCase.execute(input)
-    return response
+  async login(
+    @Body(new ZodPipe(loginDTOSchema)) input: LoginDTO,
+    @Res() response: Response,
+  ) {
+    const result = await this.authenticateUserUseCase.execute(input)
+
+    if (!result.success) return response.status(401).send(result)
+
+    return response.status(200).send(result)
   }
 
   @UseGuards(RefreshJwtGuard)

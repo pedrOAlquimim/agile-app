@@ -13,10 +13,11 @@ import { JwtGuard } from '../utils/guards/jwtGuard.guard'
 import { IRefreshTokenUseCase } from 'src/core/interfaces/useCases/auth/IRefreshTokenUseCase.interface'
 import { RefreshTokenUseCase } from 'src/application/use-cases/auth/refreshToken.use-case'
 import { env } from 'src/@env'
+import { User } from 'src/core/entities/User.entity'
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
       secret: env.JWT_SECRET_KEY,
@@ -44,6 +45,10 @@ import { env } from 'src/@env'
       provide: IRefreshTokenUseCase,
       useClass: RefreshTokenUseCase,
     },
+    {
+      provide: IUserRepository,
+      useClass: UserRepository,
+    },
   ],
   exports: [
     JwtService,
@@ -64,6 +69,10 @@ import { env } from 'src/@env'
     {
       provide: IRefreshTokenUseCase,
       useClass: RefreshTokenUseCase,
+    },
+    {
+      provide: IUserRepository,
+      useClass: UserRepository,
     },
   ],
 })

@@ -44,7 +44,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
 
       return response
     } catch (ex) {
-      throw new Error('Was not possible to connect with data base')
+      throw new Error(ex)
     }
   }
 }
