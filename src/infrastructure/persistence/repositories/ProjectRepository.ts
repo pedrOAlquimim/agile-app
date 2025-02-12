@@ -34,7 +34,7 @@ export class ProjectRepository
       where: {
         id: projectId,
       },
-      relations: ['projects_projectMembers.projectMember'],
+      relations: ['projects_projectMembers.projectMember', 'column'],
     })
   }
 }

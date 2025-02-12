@@ -12,10 +12,13 @@ export class Projects_ProjectMembers extends BaseEntity {
   @ManyToOne(
     () => ProjectMembers,
     (projectMember) => projectMember.projects_projectMembers,
+    { onDelete: 'CASCADE' },
   )
   projectMember: ProjectMembers
 
-  @ManyToOne(() => Project, (project) => project.projects_projectMembers)
+  @ManyToOne(() => Project, (project) => project.projects_projectMembers, {
+    onDelete: 'CASCADE',
+  })
   project: Project
 
   @ManyToOne(() => ProjectRoles, (role) => role.id)

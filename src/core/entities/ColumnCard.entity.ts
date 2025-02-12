@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -32,6 +33,9 @@ export class ColumnCard extends BaseEntity {
   })
   cards: Card[]
 
-  @ManyToOne(() => Project, (project) => project.column)
+  @ManyToOne(() => Project, (project) => project.column, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'projectId' })
   project: Project
 }

@@ -22,6 +22,9 @@ export const sqliteTestDbConfig: DataSourceOptions = {
     User,
   ],
   synchronize: true,
+  extra: {
+    foreign_keys: 'ON',
+  },
 }
 
 export const dataSourceTest = new DataSource(sqliteTestDbConfig)

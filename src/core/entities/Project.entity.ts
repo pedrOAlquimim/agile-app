@@ -14,6 +14,6 @@ export class Project extends BaseEntity {
   @OneToMany(() => Projects_ProjectMembers, (p_pm) => p_pm.project)
   projects_projectMembers: Projects_ProjectMembers[]
 
-  @OneToMany(() => ColumnCard, (column) => column.id)
+  @OneToMany(() => ColumnCard, (column) => column.project, { cascade: true })
   column: ColumnCard[]
 }
