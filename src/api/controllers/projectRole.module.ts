@@ -11,9 +11,10 @@ import { GetAllRolesUseCase } from 'src/application/use-cases/projectRole/getAll
 import { GetSpecifiedRoleUseCase } from 'src/application/use-cases/projectRole/getSpecifiedRole.use-case'
 import { IGetAllRolesUseCase } from 'src/core/interfaces/useCases/projectRole/IGetAllRolesUseCase.interface'
 import { IGetSpecifiedRoleUseCase } from 'src/core/interfaces/useCases/projectRole/IGetSpecifiedRoleUseCase.interface'
+import { ProjectRoles } from 'src/core/entities/ProjectRoles.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProjectRolesRepository])],
+  imports: [TypeOrmModule.forFeature([ProjectRoles])],
   controllers: [ProjectRoleController],
   providers: [
     JwtGuard,
@@ -36,6 +37,10 @@ import { IGetSpecifiedRoleUseCase } from 'src/core/interfaces/useCases/projectRo
     },
   ],
   exports: [
+    {
+      provide: IProjectRolesRepository,
+      useClass: ProjectRolesRepository,
+    },
     {
       provide: ICreateNewRoleUseCase,
       useClass: CreateNewRoleUseCase,

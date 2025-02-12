@@ -15,9 +15,11 @@ import { IColumnRepository } from 'src/core/interfaces/repositories/IColumnRepos
 import { IProjectRepository } from 'src/core/interfaces/repositories/IProjectRepository.interface'
 import { JwtGuard } from '../utils/guards/jwtGuard.guard'
 import { JwtService } from '@nestjs/jwt'
+import { Column } from 'typeorm'
+import { Project } from 'src/core/entities/Project.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ColumnRepository, ProjectRepository])],
+  imports: [TypeOrmModule.forFeature([Column, Project])],
   controllers: [ColumnController],
   providers: [
     JwtGuard,
@@ -48,6 +50,14 @@ import { JwtService } from '@nestjs/jwt'
     },
   ],
   exports: [
+    {
+      provide: IColumnRepository,
+      useClass: ColumnRepository,
+    },
+    {
+      provide: IProjectRepository,
+      useClass: ProjectRepository,
+    },
     {
       provide: ICreateNewColumnUseCase,
       useClass: CreateNewColumnUseCase,

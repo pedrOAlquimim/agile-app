@@ -13,9 +13,10 @@ import { GetContactByUserUseCase } from 'src/application/use-cases/contact/getCo
 import { IGetContactsByUserUseCase } from 'src/core/interfaces/useCases/contact/IGetContactsByUserUseCase.interface'
 import { JwtGuard } from '../utils/guards/jwtGuard.guard'
 import { JwtService } from '@nestjs/jwt'
+import { Contact } from 'src/core/entities/Contact.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ContactRepository])],
+  imports: [TypeOrmModule.forFeature([Contact])],
   controllers: [ContactController],
   providers: [
     JwtService,
@@ -57,6 +58,10 @@ import { JwtService } from '@nestjs/jwt'
     {
       provide: IGetContactsByUserUseCase,
       useClass: GetContactByUserUseCase,
+    },
+    {
+      provide: IContactRepository,
+      useClass: ContactRepository,
     },
   ],
 })

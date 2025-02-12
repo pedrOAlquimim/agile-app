@@ -17,9 +17,11 @@ import { FetchCardByColumnUseCase } from 'src/application/use-cases/card/fetchCa
 import { IUpdateCardUseCase } from 'src/core/interfaces/useCases/card/IUpdateCardUseCase.interface'
 import { UpdateCardUseCase } from 'src/application/use-cases/card/updateCard.use-case'
 import { CardController } from './card.controller'
+import { Card } from 'src/core/entities/Card.entity'
+import { Column } from 'typeorm'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CardRepository, ColumnRepository])],
+  imports: [TypeOrmModule.forFeature([Card, Column])],
   controllers: [CardController],
   providers: [
     JwtGuard,
@@ -54,6 +56,14 @@ import { CardController } from './card.controller'
     },
   ],
   exports: [
+    {
+      provide: ICardRepository,
+      useClass: CardRepository,
+    },
+    {
+      provide: IColumnRepository,
+      useClass: ColumnRepository,
+    },
     {
       provide: IChangeCardFromColumnUseCase,
       useClass: ChangeCardFromColumnUseCase,

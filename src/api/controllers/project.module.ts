@@ -19,14 +19,18 @@ import { IUpdateProjectUseCase } from 'src/core/interfaces/useCases/project/Iupd
 import { UpdateProjectUseCase } from 'src/application/use-cases/project/updateProject.use-case'
 import { ICreateNewProjectUseCase } from 'src/core/interfaces/useCases/project/ICreateNewProjectUseCase.interface'
 import { CreateNewProjectUseCase } from 'src/application/use-cases/project/createNewProject.use-case'
+import { Project } from 'src/core/entities/Project.entity'
+import { ProjectMembers } from 'src/core/entities/ProjectMembers.entity'
+import { Projects_ProjectMembers } from 'src/core/entities/Projects_ProjectMembers.entity'
+import { ProjectRoles } from 'src/core/entities/ProjectRoles.entity'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      ProjectRepository,
-      ProjectMembersRepository,
-      Projects_ProjectMembersRepository,
-      ProjectRolesRepository,
+      Project,
+      ProjectMembers,
+      Projects_ProjectMembers,
+      ProjectRoles,
     ]),
   ],
   controllers: [ProjectController],
@@ -67,6 +71,22 @@ import { CreateNewProjectUseCase } from 'src/application/use-cases/project/creat
     },
   ],
   exports: [
+    {
+      provide: IProjectRepository,
+      useClass: ProjectRepository,
+    },
+    {
+      provide: IProjectMembersRepository,
+      useClass: ProjectMembersRepository,
+    },
+    {
+      provide: IProjects_ProjectMembersRepository,
+      useClass: Projects_ProjectMembersRepository,
+    },
+    {
+      provide: IProjectRolesRepository,
+      useClass: ProjectRolesRepository,
+    },
     {
       provide: IDeleteProjectUseCase,
       useClass: DeleteProjectUseCase,

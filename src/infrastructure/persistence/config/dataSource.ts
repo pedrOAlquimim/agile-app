@@ -8,8 +8,8 @@ export const dataSourceOptions: DataSourceOptions = {
   username: env.DB_USERNAME,
   password: env.DB_PASSWORD,
   database: env.DB_DATABASE,
-  entities: ['dist/src/core/entities/*.entity.js'],
-  migrations: ['dist/src/infrastructure/persistence/migrations/*.js'],
+  entities: ['dist/core/entities/*.entity.js'],
+  migrations: ['dist/infrastructure/persistence/migrations/*.js'],
   logging: true,
 }
 

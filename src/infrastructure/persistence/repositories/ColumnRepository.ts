@@ -3,7 +3,9 @@ import { BaseRepository } from './BaseRepository'
 import { IColumnRepository } from 'src/core/interfaces/repositories/IColumnRepository.interface'
 import { Project } from 'src/core/entities/Project.entity'
 import { DataSource } from 'typeorm'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class ColumnRepository
   extends BaseRepository<ColumnCard>
   implements IColumnRepository
