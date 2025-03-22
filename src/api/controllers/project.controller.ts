@@ -16,6 +16,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Inject,
   Param,
   Post,
@@ -39,6 +40,16 @@ export class ProjectController {
     private updateProjectUseCase: IUpdateProjectUseCase,
   ) {}
 
+  @Get(':userId')
+  async getProjectsByUser(
+    @Param('userId') userId: string,
+    @Res() response: Response,
+  ) {
+    const result = await this.getProjectsByUserUseCase.execute(userId)
+
+    return response.status(200).send(result)
+  }
+
   @Post(':userId')
   async createNewProject(
     @Param('userId') userId: string,
@@ -59,7 +70,7 @@ export class ProjectController {
 
     if (!result.success) return response.status(404).send(result)
 
-    return result
+    return response.status(200).send(result)
   }
 
   @Put(':projectId')

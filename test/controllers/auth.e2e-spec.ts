@@ -13,11 +13,9 @@ describe('AuthController E2E Tests', () => {
   let app: INestApplication
 
   const removeDb = async () => {
-    fs.unlink('test/database/testDb.sqlite', (err) => {
-      if (err) {
-        return
-      }
-    })
+    try {
+      fs.unlinkSync('test/database/testDb.sqlite')
+    } catch (error) {}
   }
 
   beforeAll(async () => {

@@ -41,5 +41,8 @@ export async function registerAndCreateUser(
 
   cachedToken = test.body._data
 
-  return cachedToken
+  return {
+    user: cachedToken.user,
+    backendTokens: cachedToken.backendTokens,
+  }
 }
