@@ -19,7 +19,7 @@ export async function registerAndCreateUser(
 
   const existingUser = await userRepository.findByEmail('label@email.com')
 
-  let user = existingUser
+  let user = { ...existingUser }
 
   if (!existingUser) {
     const hashPassword = await hash('Senha123', 10)
@@ -34,15 +34,25 @@ export async function registerAndCreateUser(
     })
   }
 
-  const test = await request(app.getHttpServer())
+  const response = await request(app.getHttpServer())
     .post('/api/auth/login')
     .set('Accept', 'application/json')
     .send({ email: user.email, password: 'Senha123' })
 
-  cachedToken = test.body._data
+  if (!response.body || !response.body._data) {
+    throw new Error('Resposta inesperada do servidor')
+  }
+
+  cachedToken = response.body._data || response.body.data
+
+  if (!cachedToken.user) {
+    throw new Error(
+      'Estrutura de token inválida: propriedade "user" não encontrada',
+    )
+  }
 
   return {
     user: cachedToken.user,
-    backendTokens: cachedToken.backendTokens,
+    backendTokens: { ...cachedToken.backendTokens },
   }
 }

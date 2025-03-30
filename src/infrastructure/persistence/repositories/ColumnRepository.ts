@@ -19,6 +19,7 @@ export class ColumnRepository
       where: {
         project: project,
       },
+      relations: ['cards'],
     })
   }
 }

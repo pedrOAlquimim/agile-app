@@ -10,9 +10,15 @@ import {
 } from 'src/infrastructure/persistence/config/dataSourceTest'
 import { registerAndCreateUser } from '../utils/register-and-authenticate-user'
 import { AuthModule } from 'src/api/controllers/auth.module'
+import { UserDTO } from 'src/core/dtos/user.dto'
 
 describe('Project controller E2E Tests', () => {
   let app: INestApplication
+  let userObj: UserDTO
+  let backendTokensObj: {
+    accessToken?: string
+    refreshToken?: string
+  }
 
   const removeDb = async () => {
     try {
@@ -35,6 +41,16 @@ describe('Project controller E2E Tests', () => {
     await app.init()
   })
 
+  beforeEach(async () => {
+    const { user, backendTokens } = await registerAndCreateUser(
+      app,
+      dataSourceTest,
+    )
+
+    userObj = user
+    backendTokensObj = { ...backendTokens }
+  })
+
   afterEach(async () => {
     const entities = dataSourceTest.entityMetadatas
     for (const entity of entities) {
@@ -52,21 +68,16 @@ describe('Project controller E2E Tests', () => {
   describe('Tests with /create, /delete, /update', () => {
     describe('/get', () => {
       it('should be able to return project from a user', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'projectToReturn' })
 
         const sut = await request(app.getHttpServer())
-          .get(`/api/project/${user.id}`)
+          .get(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
 
         expect(sut.statusCode).toBe(200)
         expect(sut.body).toEqual({
@@ -80,7 +91,7 @@ describe('Project controller E2E Tests', () => {
                   projectMember: {
                     created_at: expect.any(String),
                     id: expect.any(String),
-                    userId: user.id,
+                    userId: userObj.id,
                   },
                 },
               ],
@@ -95,15 +106,10 @@ describe('Project controller E2E Tests', () => {
 
     describe('/create', () => {
       it('(POST) should be able to create a project', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'newProject' })
 
         expect(sut.statusCode).toBe(201)
@@ -121,7 +127,7 @@ describe('Project controller E2E Tests', () => {
                 projectMember: {
                   created_at: expect.any(String),
                   id: expect.any(String),
-                  userId: user.id,
+                  userId: userObj.id,
                 },
               },
             ],
@@ -130,15 +136,10 @@ describe('Project controller E2E Tests', () => {
       })
 
       it('(POST) should return 400 if does not have payload', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send()
 
         expect(sut.statusCode).toBe(400)
@@ -150,15 +151,10 @@ describe('Project controller E2E Tests', () => {
       })
 
       it('(POST) should return 400 if payload is wrong', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ wrongTitle: 'worng' })
 
         expect(sut.statusCode).toBe(400)
@@ -172,15 +168,10 @@ describe('Project controller E2E Tests', () => {
 
     describe('/delete', () => {
       it('should be able to delete a project', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const projectResponse = await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'projectToDelete' })
 
         const existingProject = projectResponse.body._data
@@ -188,7 +179,7 @@ describe('Project controller E2E Tests', () => {
         const sut = await request(app.getHttpServer())
           .delete(`/api/project/${existingProject.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
 
         expect(sut.statusCode).toBe(200)
         expect(sut.body).toEqual({
@@ -202,15 +193,10 @@ describe('Project controller E2E Tests', () => {
       })
 
       it('should not be able to delete a project that does not exist', async () => {
-        const { backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
           .delete(`/api/project/IdThatDoesNotExist`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
 
         expect(sut.statusCode).toBe(404)
         expect(sut.body).toEqual({
@@ -223,15 +209,10 @@ describe('Project controller E2E Tests', () => {
 
     describe('/update', () => {
       it('should be able to update a project', async () => {
-        const { user, backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const projectResponse = await request(app.getHttpServer())
-          .post(`/api/project/${user.id}`)
+          .post(`/api/project/${userObj.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'projectToDelete' })
 
         const existingProject = projectResponse.body._data
@@ -239,7 +220,7 @@ describe('Project controller E2E Tests', () => {
         const sut = await request(app.getHttpServer())
           .put(`/api/project/${existingProject.id}`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'projectWithUpdatedName' })
 
         expect(sut.statusCode).toBe(201)
@@ -254,15 +235,10 @@ describe('Project controller E2E Tests', () => {
       })
 
       it('should not be able to update a project that does not exist', async () => {
-        const { backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
           .put(`/api/project/IdThatDoesNotExist`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ title: 'projectWithUpdatedName' })
 
         expect(sut.statusCode).toBe(404)
@@ -274,15 +250,10 @@ describe('Project controller E2E Tests', () => {
       })
 
       it('should return 400 if payload is wrong', async () => {
-        const { backendTokens } = await registerAndCreateUser(
-          app,
-          dataSourceTest,
-        )
-
         const sut = await request(app.getHttpServer())
           .put(`/api/project/IdThatDoesNotExist`)
           .set('Accept', 'application/json')
-          .set('Authorization', `Bearer ${backendTokens.accessToken}`)
+          .set('Authorization', `Bearer ${backendTokensObj.accessToken}`)
           .send({ wrongPayload: 'projectWithUpdatedName' })
 
         expect(sut.statusCode).toBe(400)
