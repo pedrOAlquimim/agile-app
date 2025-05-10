@@ -1,13 +1,25 @@
-version: '3.7'
+version: '3.8'
 
 services:
   agile_app_api:
+    container_name: agile_app_api
+
     build:
       context: .
       dockerfile: Dockerfile
+    
+    entrypoint: sh -c 'npm install --frozen-lockfile && npm run start:debug'
+    
+    depends_on:
+      - postgres
+    
+    env_file:
+      - ".env"
 
     ports:
-      - "3000:3000"
+      - ${PORT}:${PORT}
+      - ${PORT_DEBUG}:${PORT_DEBUG}
+
 
     environment:
       - PORT=3000
@@ -15,21 +27,36 @@ services:
 
     volumes:
       - ./src:/usr/src/app/src
+    
+    networks:
+      - agile-app-net
 
   postgres:
+    container_name: postgres
+    
     image: bitnami/postgresql:latest
     
     ports:
       - '5432:5432'
+
+    env_file:
+      - ".env"
       
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=pools
-    
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
+
     volumes:
       - pools_pg_data:/bitnami/postgressql
-  
 
+    networks:
+      - agile-app-net
+  
 volumes:
   pools_pg_data:
+
+networks:
+  agile-app-net:
+    external: true
+

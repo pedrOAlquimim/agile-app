@@ -2,6 +2,8 @@ version: '3.7'
 
 services:
   agile_app_api-prod:
+    container_name: api
+
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -9,22 +11,38 @@ services:
     ports:
       - "3001:3001"
 
+    depends_on:
+      - postgres
+
+    env_file:
+      - ".env"
+
     environment:
       - PORT=3001
+      - NODE_ENV=production
+      - PG_HOST=postgres
+      - PG_USERNAME=${DB_USERNAME}
+      - PG_PASSWORD=${DB_PASSWORD}
+      - PG_DATABASE=${DB_DATABASE}
 
     volumes:
       - ./src:/usr/src/app/src
 
   postgres:
+    container_name: postgres
+
     image: bitnami/postgresql:latest
     
     ports:
       - '5432:5432'
       
+    env_file:
+      - ".env"
+      
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=pools
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
     
     volumes:
       - pools_pg_data:/bitnami/postgressql
