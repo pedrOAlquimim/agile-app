@@ -1,30 +1,8 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Agile app
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este projeto se trata de um app para organização de projetos podendo utilizar várias técnicas de agile como Kanban, Scrum etc.
+A escolha de fazer um projeto de organização é que além de implementar conceitos avançados de desenvolvimento no back, para realizar o front end também serão coisas legais e difíceis na implementação.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
 
@@ -50,23 +28,56 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
+$ npm run test:watch
 
 # e2e tests
 $ npm run test:e2e
+$ npm run test:e2e:watch
+
 
 # test coverage
 $ npm run test:cov
+
+# test debug
+$ npm run debug
 ```
 
-## Support
+## Arquitetura
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+De um modo geral, olhando o mais de cima possível a arquitetura é com o NestJs e o banco de dados Postgres
 
-## Stay in touch
+<img src="./src/assets/projectTechnologies.png" />
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+**NestJS**
+
+*NestJS é um framework para desenvolvimento de aplicações Node.js escaláveis e robustas, escrito em TypeScript (mas também suporta JavaScript puro). Ele é fortemente inspirado na arquitetura do Angular, adotando conceitos como injeção de dependência, modularização e decorators.
+Escoli ele por ser um framework muito escalável, como ele é dividiso entre módulos, controladores e serviços, o que facilita a escalabilidade e a manutenção de grandes aplicações*
+
+**Postgres**
+
+*O PostgreSQL é um sistema de gerenciamento de banco de dados relacional (RDBMS) de código aberto, altamente poderoso, confiável e extensível. Ele é conhecido por seguir rigorosamente os padrões SQL e por oferecer recursos avançados que vão além dos bancos relacionais tradicionais.
+Escoli o postgres por ser open source e como é um projeto pessoal acho que faz sentido usar open source*
+
+**Docker**
+
+*Docker é uma plataforma de containers que permite empacotar, distribuir e executar aplicações de forma isolada, leve e portátil, junto com todas as suas dependências.*
+
+### Projeto (arquitetura)
+
+Foi adotado a arquitetura Clean Architecture no projeto porque ela proporciona uma separação clara de responsabilidades, o que facilita significativamente a escrita de testes unitários e de integração. Com as dependências externas isoladas nas camadas mais externas da aplicação, consigo testar as regras de negócio de forma independente, garantindo maior manutenibilidade, escalabilidade e qualidade do código ao longo do tempo.
+Essa estrutura modular facilita a substituição ou evolução de partes específicas do sistema com menor impacto geral, algo crítico em projetos que precisam crescer de forma sustentável. Em resumo, essa escolha arquitetural permite construir uma base mais sólida, mantendo a complexidade sob controle e garantindo que a cobertura de testes seja mais efetiva e confiável
+
+<img src="./src/assets/cleanArch.jpg" />
+
+## DB Design
+
+Sobre o design do database. Para essa aplicação resolvi seguir com uma estrututra mais padrão e não seguir com um multi tenancy por exemplo, pois por se tratar mais de um MVP ent~ao fez mais sentido seguir com a arquitetura mais comum de um banco de dados
+
+<img src="./src/assets/databaseDesign.png" />
+
+## Feature
+
+Comming soon...
 
 ## License
 
